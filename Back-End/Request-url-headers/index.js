@@ -7,7 +7,6 @@ app.use(cors());
 
 app.get('/api/whoai', function (req, res, next) {
   
-
     // https://stackoverflow.com/questions/8107856/how-to-determine-a-users-ip-address-in-node
     var ip = req.headers['x-forwarded-for'] ||
         req.connection.remoteAddress ||
