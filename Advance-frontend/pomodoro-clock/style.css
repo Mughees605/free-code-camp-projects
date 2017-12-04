@@ -32,3 +32,9 @@ body {
     font-size: 6em;
     text-align: center;
 }
+
+.center {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
