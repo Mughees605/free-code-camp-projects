@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs/Observable";
-
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService{
@@ -8,7 +8,17 @@ export class AuthService{
     email:String = "mughees"
     error: boolean = false;
     errorMessage : string = 'error'
-    constructor(){
+    constructor(private route:Router){
 
     }
+
+    loginUser(email:string, password:string){
+      if(email && password){
+         this.route.navigate(['/create-poll']);
+      }
+    }
+
+    isAuthenticated() {
+        return this.loggedIn;
+      }
 }

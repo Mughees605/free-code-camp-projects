@@ -18,6 +18,9 @@ const appRouter: Routes = [
     },
     {
       path: "login", component: LoginComponent
+    },
+    {
+        path:'create-poll', component: CreatePollComponent
     }
   ]
 
