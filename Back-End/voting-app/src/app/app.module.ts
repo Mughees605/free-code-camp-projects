@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { CreatePollComponent } from './create-poll/create-poll.component';
 // services
 import { AuthService } from './services/auth.service';
+import { PollService } from './services/poll.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { AuthService } from './services/auth.service';
     FormsModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    PollService
   ],
   bootstrap: [AppComponent]
 })
