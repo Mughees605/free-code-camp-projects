@@ -1,30 +1,34 @@
+<div>
+  <div class="jumbotron text-center">
+    <h1>Dashboard</h1>
+    <button class="btn btn-default">Create Poll</button>
+    <button class="btn btn-primary">My Poll</button>
+  </div>
+</div>
 <div class="row">
   <div class="col-md-12">
-    <div class="jumbotron text-center">
-      <h1>Dashboard</h1>
-      <button class="btn btn-default">Create Poll</button>
-      <button class="btn btn-primary">My Poll</button>
-    </div>
   </div>
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4 text-center">
+      <form (ngSubmit)='createPoll(f)' #f='ngForm'>
+        <div>
+          <h2>New Poll</h2>
+          <p>Name your poll</p>
+          <input type="text" name="question" class="form-control" placeholder="Create Poll" ngModel question #question='ngModel' minlength="6">
+          <div class="warning-text" *ngIf="!question.valid && question.touched">Minimum letters or numbers 3</div>
+        </div>
 
-      <div>
-        <h2>New Poll</h2>
-        <p>Name your poll</p>
-        <input type="text" name="new poll" class="form-control" placeholder="Create Poll">
-      </div>
+        <div>
+          <p>Options</p>
+          <input type="text" name="opt1" class="form-control" placeholder="Option 1" ngModel>
+          <input type="text" name="opt2" class="form-control" placeholder="Option 2" ngModel>
+        </div>
 
-      <div>
-        <p>Options</p>
-        <input type="text" name="option" class="form-control" placeholder="Option 1">
-        <input type="text" name="option" class="form-control" placeholder="Option 2">
-      </div>
-       
-      <div class="mt-10">
-        <button class="btn btn-success btn-block">Submit</button>
-      </div>
+        <div class="mt-10">
+          <button [disabled]="!f.valid" class="btn btn-success btn-block">Submit</button>
+        </div>
+      </form>
     </div>
     <div class="col-md-4"></div>
   </div>
