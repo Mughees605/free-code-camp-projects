@@ -5,13 +5,19 @@
       <form (ngSubmit)="onRegister(f)" #f="ngForm">
         <legend>Register As New User</legend>
         <div class="form-group">
+          <label for="username">User Name</label>
+          <input type="text" name="username" class="form-control" id="username" placeholder="user name" ngModel username #username="ngModel">
+          <div class="warning-text" *ngIf="!username.valid && username.touched ">Please enter a valid username</div>
+        </div>
+        <div class="form-group">
           <label for="email">Email address</label>
           <input type="email" name="email" class="form-control" id="email" placeholder="Email" ngModel email #email="ngModel">
           <div class="warning-text" *ngIf="!email.valid && email.touched ">Please enter a valid email</div>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" name="password" class="form-control" id="password" placeholder="Password" ngModel required minlength="6" #password="ngModel">
+          <input type="password" name="password" class="form-control" id="password" placeholder="Password" ngModel required minlength="6"
+            #password="ngModel">
           <div class="warning-text" *ngIf="!password.valid && password.touched">Minimum letters or numbers 6</div>
         </div>
         <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Register</button>

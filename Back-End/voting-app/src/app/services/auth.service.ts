@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Http } from '@angular/http';
 
 @Injectable()
 export class AuthService{
@@ -7,7 +8,7 @@ export class AuthService{
     email:String = "mughees"
     error: boolean = false;
     errorMessage : string = 'error'
-    constructor(private route:Router){
+    constructor(private route:Router, private http: Http){
 
     }
 
@@ -15,6 +16,15 @@ export class AuthService{
       if(email && password){
          this.route.navigate(['/create-poll']);
       }
+    }
+
+    createUser(email:string, password:string, username:string){
+      this.http.post('http://localhost:3000/users/register' , {email,password,username})
+      .subscribe((res:any)=>{
+         console.log(res);
+      },(err)=>{
+        console.log(err)
+      })
     }
 
     isAuthenticated() {
