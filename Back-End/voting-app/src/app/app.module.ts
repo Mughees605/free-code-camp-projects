@@ -13,6 +13,7 @@ import { CreatePollComponent } from './create-poll/create-poll.component';
 // services
 import { AuthService } from './services/auth.service';
 import { PollService } from './services/poll.service';
+import { LogininRouteGuard } from './services/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import { PollService } from './services/poll.service';
   ],
   providers: [
     AuthService,
-    PollService
+    PollService,
+    LogininRouteGuard
   ],
   bootstrap: [AppComponent]
 })

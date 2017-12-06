@@ -13,6 +13,6 @@ export class HeaderComponent implements OnInit {
   }
   
   onLogout(){
-    alert('not implemented yet');
+   this.auth.onLogout();
   }
 }
