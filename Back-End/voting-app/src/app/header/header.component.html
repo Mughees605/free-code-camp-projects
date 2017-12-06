@@ -1,13 +1,14 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Voting App</a>
+      <a class="navbar-brand" [routerLink]="['/home']">Voting App</a>
     </div>
   
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a [routerLink]="['/register']" [class.hide]="this.auth.loggedIn"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       <li><a [routerLink]="['/login']" [class.hide]="this.auth.loggedIn" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      <li class="hidden-xs" [class.hide]="!this.auth.loggedIn"><a>{{this.auth.email}}</a></li>
+      <li class="hidden-xs" [class.hide]="!this.auth.loggedIn"><a>{{this.auth.username}}</a></li>
+      <li class="hidden-xs" [routerLink]="['/create-poll']" [class.hide]="!this.auth.loggedIn"><a>Create Poll</a></li>      
       <li id="logout" (click)="onLogout()" [class.hide]="!this.auth.loggedIn"><a routerLinkActive="active">LogOut</a></li>      
     </ul>
   </div>

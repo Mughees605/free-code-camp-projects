@@ -26,6 +26,7 @@ export class AuthService {
           this.email = data.user['email'];
           this.id = data.user['id'];
           this.username = data.user['username'];
+          localStorage.setItem('id' , `${this.id}`);
           this.route.navigate(['/create-poll']);
         }
         else {
@@ -52,6 +53,8 @@ export class AuthService {
   }
 
   onLogout(){
+    this.route.navigate(['/login']);
     this.loggedIn = false;
+    localStorage.removeItem('id');
   }
 }
