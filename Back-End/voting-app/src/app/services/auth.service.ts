@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Response } from '@angular/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class AuthService {
@@ -11,22 +12,25 @@ export class AuthService {
   error: boolean = false;
   errorMessage: string = 'error'
   url: string = 'http://localhost:3000/users';
-
+  auth = new BehaviorSubject<any>((JSON.parse(localStorage.getItem('user'))));
   constructor(private route: Router, private http: Http) {
 
   }
 
   loginUser(username: string, password: string) {
     this.http.post(`${this.url}/authenticate`, { username, password })
-      .subscribe((res: any) => {
-        let data = JSON.parse(res._body);
+      .subscribe((res: Response) => {
+        let data = res.json();
         if (data.success) {
+          console.log(data);
           this.error = false;
           this.loggedIn = true;
           this.email = data.user['email'];
           this.id = data.user['id'];
           this.username = data.user['username'];
-          localStorage.setItem('id' , `${this.id}`);
+          let localObj = {username:this.username, loggedIn:true}
+          localStorage.setItem('user', JSON.stringify(localObj));
+          this.auth.next(localObj);
           this.route.navigate(['/create-poll']);
         }
         else {
@@ -52,9 +56,10 @@ export class AuthService {
     return this.loggedIn;
   }
 
-  onLogout(){
+  onLogout() {
     this.route.navigate(['/login']);
     this.loggedIn = false;
-    localStorage.removeItem('id');
+    localStorage.removeItem('user');
+    this.auth.next(null)
   }
 }
