@@ -9,7 +9,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const appRouter: Routes = [
     {
-      path: "", redirectTo: "create-pollv", pathMatch: "full"
+      path: "", redirectTo: "create-poll", pathMatch: "full"
     },
     {
       path: "home", component: HomeComponent
