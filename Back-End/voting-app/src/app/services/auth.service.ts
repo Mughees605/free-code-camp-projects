@@ -12,9 +12,8 @@ export class AuthService {
   error: boolean = false;
   errorMessage: string = 'error'
   url: string = 'http://localhost:3000/users';
-  auth = new BehaviorSubject<any>((JSON.parse(localStorage.getItem('user'))));
+  auth = new BehaviorSubject<any>(this.getLocalStorage());
   constructor(private route: Router, private http: Http) {
-
   }
 
   loginUser(username: string, password: string) {
@@ -22,20 +21,20 @@ export class AuthService {
       .subscribe((res: Response) => {
         let data = res.json();
         if (data.success) {
-          console.log(data);
           this.error = false;
           this.loggedIn = true;
           this.email = data.user['email'];
           this.id = data.user['id'];
           this.username = data.user['username'];
-          let localObj = {username:this.username, loggedIn:true}
-          localStorage.setItem('user', JSON.stringify(localObj));
+          let localObj = {username:this.username, loggedIn:true , id:this.id , token:data['token']};
+          this.setLocalStorage(localObj);
           this.auth.next(localObj);
           this.route.navigate(['/create-poll']);
         }
         else {
           this.error = true;
           this.errorMessage = data.msg
+          this.clearLocalStorage();
         }
       }, (err: Error) => {
         this.error = true;
@@ -59,7 +58,19 @@ export class AuthService {
   onLogout() {
     this.route.navigate(['/login']);
     this.loggedIn = false;
-    localStorage.removeItem('user');
     this.auth.next(null)
   }
+
+  setLocalStorage(localObj){
+    localStorage.setItem('user', JSON.stringify(localObj));
+  }
+
+  clearLocalStorage(){
+    localStorage.removeItem('user');
+  }
+
+  getLocalStorage(){
+    return JSON.parse(localStorage.getItem('user'))
+  }
+
 }
