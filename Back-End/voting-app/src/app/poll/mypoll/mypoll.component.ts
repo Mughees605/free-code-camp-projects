@@ -11,10 +11,11 @@ import { User } from '../../models/user.model';
 })
 export class MypollComponent implements OnInit {
 
-  subscription: ISubscription
+  subscription: ISubscription;
+  uid :string;
   constructor(private authSer: AuthService, private pollSer: PollService) {
     this.authSer.auth.subscribe((user: User) => {
-      
+      this.uid = user['id'];
     })
   }
 
