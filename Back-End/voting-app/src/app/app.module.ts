@@ -9,7 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { CreatePollComponent } from './create-poll/create-poll.component';
+import { PollComponent} from './poll/poll.component';
+import { CreatePollComponent } from './poll/create-poll/create-poll.component';
+import { PollDetailComponent } from './poll/poll-detail/poll-detail.component';
+import { PollPostedComponent } from './poll/poll-posted/poll-posted.component';
 // services
 import { AuthService } from './services/auth.service';
 import { PollService } from './services/poll.service';
@@ -21,7 +24,10 @@ import { LogininRouteGuard } from './services/auth.guard';
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
+    PollComponent,
     CreatePollComponent,
+    PollDetailComponent,
+    PollPostedComponent,
   ],
   imports: [
     BrowserModule,

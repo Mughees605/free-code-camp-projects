@@ -29,7 +29,7 @@ export class AuthService {
           let localObj = {username:this.username, loggedIn:true , id:this.id , token:data['token']};
           this.setLocalStorage(localObj);
           this.auth.next(localObj);
-          this.route.navigate(['/create-poll']);
+          this.route.navigate(['/poll']);
         }
         else {
           this.error = true;
@@ -58,7 +58,8 @@ export class AuthService {
   onLogout() {
     this.route.navigate(['/login']);
     this.loggedIn = false;
-    this.auth.next(null)
+    this.auth.next(false);
+    this.clearLocalStorage();
   }
 
   setLocalStorage(localObj){
