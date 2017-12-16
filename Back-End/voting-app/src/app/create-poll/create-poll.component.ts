@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PollService } from '../services/poll.service';
+import { AuthService } from '../services/auth.service';
 import { CreatePoll } from '../models/newpoll.model';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-create-poll',
@@ -10,22 +12,31 @@ import { CreatePoll } from '../models/newpoll.model';
 })
 export class CreatePollComponent implements OnInit {
 
-  constructor(public poll:PollService) { }
-
-  ngOnInit() {
+  newPoll: CreatePoll = new CreatePoll();
+  constructor(private pollSer: PollService , private AuthSer: AuthService ) {
+    this.newPoll.options = [{ name: '' }, { name: '' }];
+    this.newPoll.title = '';
+    this.newPoll.creatorId = ''
   }
 
-  createPoll(f:NgForm){
-    let options = [];
-    let question:string = f.value.question;
-    for (var key in f.value){
-      if( key !== 'question'){
-         options.push(f.value[key])
-      }
-    }    
-    let createPoll = new CreatePoll(question , options)
-    this.poll.createNewPollService(createPoll);
-    f.reset();
+  ngOnInit() {
+   this.AuthSer.auth.subscribe((user:User)=>{
+    this.newPoll.creatorId = user.id;
+   })
+  }
+
+  addOption() {
+    this.newPoll.options.push({ name: '' })
+  }
+
+  createPoll() {
+    this.pollSer.createNewPollService(this.newPoll);  
+    this.reset()  
+  }
+
+  reset(){
+    this.newPoll.options = [{ name: '' }, { name: '' }];
+    this.newPoll.title = ''
   }
 
 }

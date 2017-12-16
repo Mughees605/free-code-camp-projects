@@ -11,22 +11,24 @@
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4 text-center">
-      <form (ngSubmit)='createPoll(f)' #f='ngForm'>
-        <div>
+      <form>
+        <div class="form-group">
           <h2>New Poll</h2>
           <p>Name your poll</p>
-          <input type="text" name="question" class="form-control" placeholder="Create Poll" ngModel question #question='ngModel' minlength="6">
-          <div class="warning-text" *ngIf="!question.valid && question.touched">Minimum letters or numbers 3</div>
+          <input type="text" name="title" class="form-control" placeholder="Create Poll" [(ngModel)]="newPoll.title" minlength="6">
         </div>
 
-        <div>
-          <p>Options</p>
-          <input type="text" name="opt1" class="form-control" placeholder="Option 1" ngModel>
-          <input type="text" name="opt2" class="form-control" placeholder="Option 2" ngModel>
+        <div class="form-group" *ngFor='let option of newPoll.options; let i = index'>
+          <input type="text" [(ngModel)]="option.name" id="option{{i}}" placeholder="option {{i + 1}}" name="option{{i}}" class="form-control">
         </div>
 
         <div class="mt-10">
-          <button [disabled]="!f.valid" class="btn btn-success btn-block">Submit</button>
+          <div class="col-md-6">
+            <button  class="btn btn-success btn-block" (click)="createPoll()">Submit</button>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-success btn-block" (click)="addOption()">Add</button>
+          </div>
         </div>
       </form>
     </div>
