@@ -1,3 +1,6 @@
-<p>
-  home works!
-</p>
+<div class="container">
+  <h2>POLLS</h2>
+  <ul class="list-group">
+    <li  class="list-group-item" *ngFor='let poll of allPolls; let i = index' id="{{poll._id}}">{{poll.title}}</li>
+  </ul>
+</div>
