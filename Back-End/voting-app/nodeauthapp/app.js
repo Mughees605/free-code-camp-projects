@@ -21,7 +21,7 @@ mongoose.connection.on('error', (err) => {
 
 const app = express();
 
-const users = require('./routes/users');
+const users = require('./user/user');
 const polls = require('./poll/poll.routes');
 
 // Port Number
