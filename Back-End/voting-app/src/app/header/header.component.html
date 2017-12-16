@@ -8,7 +8,7 @@
       <li><a [routerLink]="['/register']" [class.hide]="loggedIn"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       <li><a [routerLink]="['/login']" [class.hide]="loggedIn" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       <li class="hidden-xs" [class.hide]="!loggedIn"><a>{{username}}</a></li>
-      <li class="hidden-xs" [routerLink]="['/create-poll']" [class.hide]="!loggedIn"><a>Create Poll</a></li>      
+      <li class="hidden-xs" [routerLink]="['/poll']" [class.hide]="!loggedIn"><a>Create Poll</a></li>      
       <li id="logout" (click)="onLogout()" [class.hide]="!loggedIn"><a routerLinkActive="active">LogOut</a></li>      
     </ul>
   </div>

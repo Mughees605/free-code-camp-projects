@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PollService } from '../services/poll.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private pollSer:PollService) { }
 
   ngOnInit() {
+    this.pollSer.getAll().subscribe((res)=>{
+      console.log(res);
+    })
   }
 
 }

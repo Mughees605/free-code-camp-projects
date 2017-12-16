@@ -24,6 +24,18 @@ export class PollService implements OnDestroy {
             .catch(err => err)
     }
 
+    myPolls(userid: string): Observable<CreatePoll[]> {
+        return this.http.get(`${this.url}/myPoll`)
+            .map(res => res.json())
+            .catch(err => err)
+    }
+
+    getAll(): Observable<CreatePoll[]> {
+        return this.http.get(`${this.url}/getAll`)
+            .map(res => res.json())
+            .catch(err => err)
+    }
+
     ngOnDestroy() {
         if (!this.subscription.closed) {
             this.subscription.unsubscribe();

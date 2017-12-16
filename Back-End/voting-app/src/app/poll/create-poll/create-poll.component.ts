@@ -6,6 +6,7 @@ import { CreatePoll } from '../../models/newpoll.model';
 import { User } from '../../models/user.model';
 import { ISubscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-create-poll',
   templateUrl: './create-poll.component.html',
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
 export class CreatePollComponent implements OnInit, OnDestroy {
   subscription: ISubscription;
   newPoll: CreatePoll = new CreatePoll();
-  constructor(private pollSer: PollService, private AuthSer: AuthService, private router:Router) {
+  constructor(private pollSer: PollService, private AuthSer: AuthService, private router: Router) {
     this.newPoll.options = [{ name: '' }, { name: '' }];
     this.newPoll.title = '';
     this.newPoll.creatorId = ''
@@ -33,8 +34,8 @@ export class CreatePollComponent implements OnInit, OnDestroy {
   }
 
   createPoll() {
-    this.pollSer.createNewPollService(this.newPoll).subscribe((poll: CreatePoll)=>{
-     this.router.navigate(['poll', poll._id, 'poll-detail'])
+    this.pollSer.createNewPollService(this.newPoll).subscribe((poll: CreatePoll) => {
+      this.router.navigate(['poll', poll._id, 'posted'])
     });
     this.reset()
   }
