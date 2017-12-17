@@ -25,7 +25,7 @@ export class PollService implements OnDestroy {
     }
 
     myPolls(userid: string): Observable<CreatePoll[]> {
-        return this.http.get(`${this.url}/myPoll`)
+        return this.http.get(`${this.url}/${userid}/mypolls`)
             .map(res => res.json())
             .catch(err => err)
     }
@@ -33,7 +33,11 @@ export class PollService implements OnDestroy {
     getAll(): Observable<CreatePoll[]> {
         return this.http.get(`${this.url}/getAll`)
             .map(res => res.json())
-            .catch(err => err)
+    }
+
+    getPoll(): Observable<CreatePoll> {
+        return this.http.get(`${this.url}/${"5a34700c48e1c32eec7b2105"}`)
+            .map(res => res.json())
     }
 
     ngOnDestroy() {

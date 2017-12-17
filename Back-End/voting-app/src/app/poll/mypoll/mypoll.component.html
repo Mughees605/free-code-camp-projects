@@ -1,3 +1,7 @@
-<p>
-  mypoll works!
-</p>
+<div class="container">
+    <h2 class="text-center"> My POLLS</h2>
+    <ul class="list-group" *ngIf='mypoll$  | async as polls; else loading'>
+      <li class="list-group-item" *ngFor='let poll of polls; let i = index' id="{{poll._id}}">{{poll.title}}</li>
+    </ul>
+  </div>
+  <ng-template #loading>Loading...</ng-template>

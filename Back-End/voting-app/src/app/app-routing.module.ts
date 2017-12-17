@@ -27,9 +27,9 @@ const appRouter: Routes = [
   {
     path: 'poll', component: PollComponent, canActivate: [LogininRouteGuard], children: [
       { path: '', component: CreatePollComponent },
+      { path: ':id', component: PollDetailComponent },
       { path: 'mypolls', component: MypollComponent },
       { path: ':id/posted', component: PollPostedComponent },
-      { path: ':id/detail', component: PollDetailComponent },
     ]
   }
 ]
