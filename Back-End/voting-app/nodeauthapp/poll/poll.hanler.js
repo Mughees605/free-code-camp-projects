@@ -39,7 +39,7 @@ module.exports.addVote = function (req, res) {
 
     if (req.canVote) {
         let votes = req.options.votes;
-        votes.push(ipAddress);
+        votes.push('192.168.0.1');
         req.poll.save(function (err) {
             if (err) return res.status(503).json({ 'message': err.message });
             res.json(req.poll);

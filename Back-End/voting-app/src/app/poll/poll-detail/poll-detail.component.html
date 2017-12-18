@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-4">
       <div *ngFor='let option of poll.options'>
-        <input type="radio" name="{{option.name}}" id="{{option._id}}" /> {{option.name}}
+        <input type="radio" name="{{option.name}}" id="{{option._id}}" (click)='selectedOption(option , poll._id)'/> {{option.name}}
       </div>
     </div>
     <div class="col-md-4">
@@ -17,8 +17,5 @@
       </h3>
     </div>
   </div>
-  <!-- <ul class="list-group" *ngIf='allPolls$ | async as polls; else loading'>
-      <li class="list-group-item" *ngFor='let poll of polls; let i = index' id="{{poll._id}}" [routerLink]="['/poll' , poll._id]">{{poll.title}}</li>
-    </ul> -->
 </div>
 <ng-template #loading>Loading...</ng-template>

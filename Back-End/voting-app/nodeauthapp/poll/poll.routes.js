@@ -14,7 +14,7 @@ router.param('pollId', function (req, res, next, id) {
 let canVote = function (req, res, next) {
     let ipAddress = req.headers['x-forwarded-for'] || req.ip
     if (req.poll._id) {
-        Poll.findOne({ '_id': req.poll._id, 'options.votes': ipAddress }, function (err, option) {
+        Poll.findOne({ '_id': req.poll._id, 'options.votes': '192.168.0.1' }, function (err, option) {
             if (err) next(err);
             req.canVote = !option;
             req.poll['canVote'] = !option;
@@ -24,8 +24,8 @@ let canVote = function (req, res, next) {
 }
 
 router.param('optionId', function (req, res, next, id) {
-    req.option = req.poll.options.id(id) // options [{}]
-    if (!req.option) {
+    req.options = req.poll.options.id(id) // options [{}]
+    if (!req.options) {
         let err = new Error('Not Found');
         err.status = 404;
         next(err);
@@ -52,6 +52,6 @@ router.route('/:pollId')
 
 router.route('/:pollId/options/:optionId/vote')
 
-    .post(canVote, pollHandlers.addVote)
+    .get(canVote, pollHandlers.addVote)
 
 module.exports = router;

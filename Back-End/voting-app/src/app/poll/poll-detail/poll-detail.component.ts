@@ -10,13 +10,21 @@ import { Observable } from 'rxjs/Observable';
 })
 export class PollDetailComponent implements OnInit {
 
-  poll$: Observable<CreatePoll> 
+  poll$: Observable<CreatePoll>
 
   constructor(private pollSer: PollService, private routes: ActivatedRoute) { }
 
   ngOnInit() {
     this.routes.params.subscribe((params: Params) => {
       this.poll$ = this.pollSer.getPoll(params['id']);
+    })
+  }
+
+  selectedOption(data,pollId){
+    this.pollSer.addVote(pollId, data._id).subscribe((res)=>{
+      console.log(res,"res");
+    },(err)=>{
+       alert(err.message)
     })
   }
 
