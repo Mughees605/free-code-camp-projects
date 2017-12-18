@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PollService } from '../../services/poll.service';
-
+import { ActivatedRoute, Params } from '@angular/router';
+import { CreatePoll } from '../../models/newpoll.model';
+import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'app-poll-detail',
   templateUrl: './poll-detail.component.html',
@@ -8,11 +10,13 @@ import { PollService } from '../../services/poll.service';
 })
 export class PollDetailComponent implements OnInit {
 
-  constructor( private pollSer : PollService) { }
+  poll$: Observable<CreatePoll> 
+
+  constructor(private pollSer: PollService, private routes: ActivatedRoute) { }
 
   ngOnInit() {
-    this.pollSer.getPoll().subscribe((res)=>{
-       console.log(res,"fasdfasdfasf");
+    this.routes.params.subscribe((params: Params) => {
+      this.poll$ = this.pollSer.getPoll(params['id']);
     })
   }
 

@@ -1,7 +1,7 @@
 <div class="container">
   <h2 class="text-center">POLLS</h2>
   <ul class="list-group" *ngIf='allPolls$ | async as polls; else loading'>
-    <li class="list-group-item" *ngFor='let poll of polls; let i = index' id="{{poll._id}}">{{poll.title}}</li>
+    <li class="list-group-item" *ngFor='let poll of polls; let i = index' id="{{poll._id}}" [routerLink]="['/poll' , poll._id]">{{poll.title}}</li>
   </ul>
 </div>
 <ng-template #loading>Loading...</ng-template>

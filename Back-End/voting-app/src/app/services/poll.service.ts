@@ -35,8 +35,8 @@ export class PollService implements OnDestroy {
             .map(res => res.json())
     }
 
-    getPoll(): Observable<CreatePoll> {
-        return this.http.get(`${this.url}/${"5a34700c48e1c32eec7b2105"}`)
+    getPoll(pollId:string): Observable<CreatePoll> {
+        return this.http.get(`${this.url}/${pollId}`)
             .map(res => res.json())
     }
 

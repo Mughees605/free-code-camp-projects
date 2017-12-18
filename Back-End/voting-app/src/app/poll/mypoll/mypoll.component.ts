@@ -19,7 +19,7 @@ export class MypollComponent implements OnInit {
   constructor(private authSer: AuthService, private pollSer: PollService) {
     this.authSer.auth.subscribe((user: User) => {
       this.uid = user['id'];
-    }).unsubscribe();
+    })
   }
 
   ngOnInit() {
