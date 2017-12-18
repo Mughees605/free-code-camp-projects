@@ -41,17 +41,17 @@ export class PollService implements OnDestroy {
       .map(res => res.json())
   }
 
+  addVote(pollId, optionId): Observable<CreatePoll> {
+    console.log(pollId, optionId, "pollId and optionId")
+    return this.http.get(`${this.url}/${pollId}/options/${optionId}/vote`)
+      .map(res => res.json())
+      .catch(err => Observable.throw(JSON.parse(err._body)))
+  }
+
   ngOnDestroy() {
     if (!this.subscription.closed) {
       this.subscription.unsubscribe();
     }
-  }
-
-  addVote(pollId, optionId): Observable<any> {
-    console.log(pollId, optionId, "pollId and optionId")
-    return this.http.get(`${this.url}/${pollId}/options/${optionId}/vote`)
-      .map(res => res.json())
-      .catch( err => Observable.throw(JSON.parse(err._body)))
   }
 
 }
