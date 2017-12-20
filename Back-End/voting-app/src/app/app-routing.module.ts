@@ -5,6 +5,7 @@ import { MypollComponent } from './poll/mypoll/mypoll.component';
 import { PollPostedComponent } from './poll/poll-posted/poll-posted.component';
 import { CreatePollComponent } from './poll/create-poll/create-poll.component';
 import { PollDetailComponent } from './poll/poll-detail/poll-detail.component';
+import { PollchartComponent } from './poll/pollchart/pollchart.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { LogininRouteGuard } from './services/auth.guard';
@@ -29,6 +30,7 @@ const appRouter: Routes = [
       { path: '', component: CreatePollComponent },
       { path: 'my-polls', component: MypollComponent },
       { path: ':id', component: PollDetailComponent },
+      { path: ':chart/:id' , component : PollchartComponent},
       { path: ':id/posted', component: PollPostedComponent },
     ]
   }
