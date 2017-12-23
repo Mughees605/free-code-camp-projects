@@ -1,3 +1,9 @@
-<p>
-  pollchart works!
-</p>
+<div *ngIf="optionName.length > 0">
+  <canvas
+  baseChart
+  [data]="votes"
+  [labels]="optionName"
+  [chartType]="'doughnut'">
+</canvas>
+
+</div>

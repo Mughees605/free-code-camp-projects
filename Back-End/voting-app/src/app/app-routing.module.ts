@@ -1,4 +1,4 @@
-import { LoginComponent } from './login/login.component';
+   import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PollComponent } from './poll/poll.component';
 import { MypollComponent } from './poll/mypoll/mypoll.component';

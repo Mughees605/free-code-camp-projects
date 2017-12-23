@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { ChartsModule } from 'ng2-charts';
 // components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -39,7 +40,8 @@ import { PollchartComponent } from './poll/pollchart/pollchart.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ChartsModule
   ],
   providers: [
     AuthService,
