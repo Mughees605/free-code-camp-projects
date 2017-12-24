@@ -9,40 +9,46 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+// import * as config from '../../../config.json';
+
+
 
 @Injectable()
 
 export class PollService implements OnDestroy {
 
   subscription: ISubscription;
-  url: string = 'http://localhost:3000/polls';
+  url: string = '';
   constructor(public auth: AuthService, public http: Http) {
+    if(window.location.hostname === "localhost" && window.location.port === "4200"){
+      this.url = `http://localhost:8485`
+    }
   }
 
   createNewPollService(pollData: CreatePoll): Observable<CreatePoll> {
-    return this.http.post(`${this.url}/createPoll`, pollData)
+    return this.http.post(`${this.url}/polls/createPoll`, pollData)
       .map(res => res.json())
       .catch(err => err)
   }
 
   myPolls(userid: string): Observable<CreatePoll[]> {
-    return this.http.get(`${this.url}/${userid}/mypolls`)
+    return this.http.get(`${this.url}/${userid}/polls/mypolls`)
       .map(res => res.json())
       .catch(err => err)
   }
 
   getAll(): Observable<CreatePoll[]> {
-    return this.http.get(`${this.url}/getAll`)
+    return this.http.get(`${this.url}/polls/getAll`)
       .map(res => res.json())
   }
 
   getPoll(pollId: string): Observable<CreatePoll> {
-    return this.http.get(`${this.url}/${pollId}`)
+    return this.http.get(`${this.url}/polls/${pollId}`)
       .map(res => res.json())
   }
 
   addVote(pollId, optionId): Observable<CreatePoll> {
-    return this.http.get(`${this.url}/${pollId}/options/${optionId}/vote`)
+    return this.http.get(`${this.url}/polls/${pollId}/options/${optionId}/vote`)
       .map(res => res.json())
       .catch(err => Observable.throw(JSON.parse(err._body)))
   }

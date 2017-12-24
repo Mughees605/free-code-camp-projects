@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Response } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+// import * as config from '../../../config.json';
+
 
 @Injectable()
 export class AuthService {
@@ -11,13 +13,16 @@ export class AuthService {
   username: string;
   error: boolean = false;
   errorMessage: string = 'error'
-  url: string = 'http://localhost:3000/users';
+  url: string = '';
   auth = new BehaviorSubject<any>(this.getLocalStorage());
   constructor(private route: Router, private http: Http) {
+    if(window.location.hostname === 'localhost' && window.location.port === '4200'){
+      this.url = `http://localhost:8485`
+    }
   }
 
   loginUser(username: string, password: string) {
-    this.http.post(`${this.url}/authenticate`, { username, password })
+    this.http.post(`${this.url}/users/authenticate`, { username, password })
       .subscribe((res: Response) => {
         let data = res.json();
         if (data.success) {
@@ -43,7 +48,7 @@ export class AuthService {
   }
 
   createUser(email: string, password: string, username: string) {
-    this.http.post(`${this.url}/register`, { email, password, username })
+    this.http.post(`${this.url}/users/register`, { email, password, username })
       .subscribe((res: any) => {
         this.route.navigate(['/login']);
       }, (err) => {
