@@ -26,7 +26,7 @@ const users = require('./server/user/user');
 const polls = require('./server/poll/poll.routes');
 
 // Port Number
-const port = configPort.port;
+const port = process.env.PORT || configPort.port;
 
 // CORS Middleware
 app.use(cors());
